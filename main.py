@@ -8,12 +8,21 @@ class Window:
         self.is_running = False
         self.canvas = tk.Canvas(self.root, width = width, height = height)
         self.canvas.pack(expand = True, fill = 'both')
+        self.root.protocol("WM_DELETE_WINDOW", self.close)
 
-    def run(self):
+    def redraw(self):
+        self.root.update_idletasks()
+        self.root.update()
+    
+    def wait_for_close(self):
         self.is_running = True
-        self.root.mainloop()
+        while(self.is_running == True):
+            self.redraw()
+
+    def close(self):
+        self.is_running = False       
 
 if __name__ == "__main__":
     app = Window(800,600)
-    app.run()            
+    app.wait_for_close()            
         
