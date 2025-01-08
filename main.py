@@ -40,16 +40,44 @@ class Line:
             self.point1.x, self.point1.y, self.point2.x, self.point2.y, fill=fill_color, width=2
         )
 
+class Cell:
+    def __init__(self, x1,
+                       x2,
+                       y1,
+                       y2,
+                       win
+                       ):
+        self.has_left_wall = True
+        self.has_right_wall = True
+        self.has_top_wall = True,
+        self.has_bottom_wall = True
+        self.win = win
+        self.x1 = x1
+        self.x2 = x2
+        self.y1 = y1
+        self.y2 = y2
+
+    def draw(self):
+        if self.has_left_wall:
+            self.win.create_line(self.x1, self.y1, self.x1, self.y2, fill="black", width = 2)
+        if self.has_right_wall:
+            self.win.create_line(self.x2, self.y1, self.x2, self.y2, fill="black", width = 2)
+        if self.has_bottom_wall:
+            self.win.create_line(self.x1, self.y2, self.x2, self.y2, fill="black", width = 2)    
+        if self.has_top_wall:
+            self.win.create_line(self.x1, self.y1, self.x2, self.y1, fill="black", width = 2)        
+
+                
+
                    
 
 
 if __name__ == "__main__":
     app = Window(800,600)
     #example line, which is working
-    point1 = Point(300,300)
-    point2 = Point(500, 500)
-    line = Line(point1=point1, point2=point2)
-    app.draw_line(line=line)
-
+    point1 = Point(150,150)
+    point2 = Point(200,200)
+    cell = Cell(x1=point1.x, y1=point1.y, x2=point2.x, y2=point2.y, win=app.canvas)
+    cell.draw()
     app.wait_for_close()            
         
