@@ -65,19 +65,29 @@ class Cell:
         if self.has_bottom_wall:
             self.win.create_line(self.x1, self.y2, self.x2, self.y2, fill="black", width = 2)    
         if self.has_top_wall:
-            self.win.create_line(self.x1, self.y1, self.x2, self.y1, fill="black", width = 2)        
+            self.win.create_line(self.x1, self.y1, self.x2, self.y1, fill="black", width = 2)
 
-                
-
-                   
-
+    def draw_move(self, to_cell, undo=False):
+        x1 = (self.x1 + self.x2) / 2
+        y1 = (self.y1 + self.y2) / 2
+        x2 = (to_cell.x1 + to_cell.x2) / 2
+        y2 = (to_cell.y1 + to_cell.y2) / 2
+        if undo == False:
+            self.win.create_line(x1, y1, x2, y2, fill="red", width = 2)
+        else:
+            self.win.create_line(x1, y1, x2, y2, fill="gray", width = 2) 
 
 if __name__ == "__main__":
     app = Window(800,600)
     #example line, which is working
     point1 = Point(150,150)
     point2 = Point(200,200)
-    cell = Cell(x1=point1.x, y1=point1.y, x2=point2.x, y2=point2.y, win=app.canvas)
-    cell.draw()
+    point3 = Point(400,400)
+    point4 = Point(600,600)
+    cell1 = Cell(x1=point1.x, y1=point1.y, x2=point2.x, y2=point2.y, win=app.canvas)
+    cell2 = Cell(x1=point3.x, y1=point3.y, x2=point4.x, y2=point4.y, win=app.canvas)
+    cell1.draw()
+    cell2.draw()
+    cell1.draw_move(to_cell=cell2)
     app.wait_for_close()            
         
