@@ -1,3 +1,4 @@
+import time
 import tkinter as tk
 
 #create the window in a class
@@ -40,6 +41,51 @@ class Line:
             self.point1.x, self.point1.y, self.point2.x, self.point2.y, fill=fill_color, width=2
         )
 
+class Maze:
+    def __init__(
+        self,
+        x1,
+        y1,
+        num_rows,
+        num_cols,
+        cell_size_x,
+        cell_size_y,
+        win,
+    ):
+        self._cells = []
+        self._x1 = x1
+        self._y1 = y1
+        self._num_rows = num_rows
+        self._num_cols = num_cols
+        self._cell_size_x = cell_size_x
+        self._cell_size_y = cell_size_y
+        self._win = win
+
+        self._create_cells()
+
+    def _create_cells(self):
+        for i in range(self._num_cols):  # Loop through columns
+            col_cells = []
+            for j in range(self._num_rows):  # Loop through rows
+                x1 = self._x1 + i * self._cell_size_x
+                y1 = self._y1 + j * self._cell_size_y
+                x2 = x1 + self._cell_size_x
+                y2 = y1 + self._cell_size_y
+                col_cells.append(Cell(x1, x2, y1, y2, self._win.canvas))
+            self._cells.append(col_cells)
+        for i in range(self._num_cols):
+            for j in range(self._num_rows):
+                self._draw_cell(i, j)
+
+    def _draw_cell(self, i, j):
+        self._cells[i][j].draw()
+        self._animate()
+
+    def _animate(self):
+        self._win.redraw()
+        time.sleep(0.05)
+
+
 class Cell:
     def __init__(self, x1,
                        x2,
@@ -80,14 +126,15 @@ class Cell:
 if __name__ == "__main__":
     app = Window(800,600)
     #example line, which is working
-    point1 = Point(150,150)
-    point2 = Point(200,200)
-    point3 = Point(400,400)
-    point4 = Point(600,600)
-    cell1 = Cell(x1=point1.x, y1=point1.y, x2=point2.x, y2=point2.y, win=app.canvas)
-    cell2 = Cell(x1=point3.x, y1=point3.y, x2=point4.x, y2=point4.y, win=app.canvas)
-    cell1.draw()
-    cell2.draw()
-    cell1.draw_move(to_cell=cell2)
+    #point1 = Point(150,150)
+    #point2 = Point(200,200)
+    #point3 = Point(400,400)
+    #point4 = Point(600,600)
+    #cell1 = Cell(x1=point1.x, y1=point1.y, x2=point2.x, y2=point2.y, win=app.canvas)
+    #cell2 = Cell(x1=point3.x, y1=point3.y, x2=point4.x, y2=point4.y, win=app.canvas)
+    #cell1.draw()
+    #cell2.draw()
+    #cell1.draw_move(to_cell=cell2)
+    maze = Maze(50, 50, 12, 16, 45, 40, app)
     app.wait_for_close()            
         
