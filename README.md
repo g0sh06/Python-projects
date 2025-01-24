@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Python-projects
 =======
 # Maze Solver
@@ -27,3 +28,6 @@ This is a simple maze solver application using recursion and graphical user inte
 ```bash
 python maze_solver.py
 >>>>>>> solver-branch
+=======
+# Sudoku-Solver
+>>>>>>> sudoku-branch
