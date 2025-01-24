@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Python-projects
 =======
 # Maze Solver
@@ -35,3 +36,7 @@ python maze_solver.py
 =======
 # Mandelbrot-Set
 >>>>>>> mandelbrot-branch
+=======
+# Chatbot
+## Small Chatbot with python, which will be used in Framerwork Development course 
+>>>>>>> chatbot-branch
