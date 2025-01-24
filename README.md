@@ -2,6 +2,8 @@
 
 This is a simple maze solver application using recursion and graphical user interface (GUI) built with Python's `tkinter` library. The maze is generated randomly, and a path is found from the start to the goal using a depth-first search algorithm.
 
+![alt text](GIF.gif)
+
 ## Features
 
 - Random maze generation
@@ -21,6 +23,3 @@ This is a simple maze solver application using recursion and graphical user inte
 
 ```bash
 python maze_solver.py
-
-
-![alt text](image.png)
