@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 # Python-projects
 =======
 # Maze Solver
@@ -29,14 +25,4 @@ This is a simple maze solver application using recursion and graphical user inte
 
 ```bash
 python maze_solver.py
->>>>>>> solver-branch
-=======
-# Sudoku-Solver
->>>>>>> sudoku-branch
-=======
-# Mandelbrot-Set
->>>>>>> mandelbrot-branch
-=======
-# Chatbot
-## Small Chatbot with python, which will be used in Framerwork Development course 
->>>>>>> chatbot-branch
+
