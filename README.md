@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Python-projects
 =======
 # Maze Solver
@@ -31,3 +32,6 @@ python maze_solver.py
 =======
 # Sudoku-Solver
 >>>>>>> sudoku-branch
+=======
+# Mandelbrot-Set
+>>>>>>> mandelbrot-branch
