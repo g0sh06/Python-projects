@@ -61,6 +61,7 @@ class Maze:
         self._cell_size_x = cell_size_x
         self._cell_size_y = cell_size_y
         self._win = win
+        self.solved = False
 
         self._create_cells()
 
@@ -136,8 +137,44 @@ class Maze:
             for cell in col:
                 cell.visited = False
 
+    def solve(self):
+        self._solve_r(i = 0, j = 0)
 
 
+
+    def _solve_r(self, i, j):
+        self._animate()
+        self._cells[i][j].visited = True
+
+        if self._cells[-1][-1]:
+            return True
+
+        directions = [
+        (0, -1),  
+        (0, 1),   
+        (-1, 0),  
+        (1, 0)]  
+
+        for x, y in directions:
+            ni, nj = i + x, j + y
+
+            if 0 <= ni < self._num_cols and 0 <= nj < self._num_rows:
+               next_cell = self._cells[ni][nj]
+               current_cell = self._cells[i][j]
+
+               if not next_cell.visited and (
+                  (x == -1 and not current_cell.has_left_wall) or
+                  (x == 1 and not current_cell.has_right_wall) or
+                  (y == -1 and not current_cell.has_top_wall) or
+                  (y == 1 and not current_cell.has_bottom_wall)
+               ):
+
+                current_cell.draw_move(next_cell)
+                if self._solve_r(ni, nj):
+                    return True
+                current_cell.draw_move(next_cell, undo=True)
+
+        return False
 
 class Cell:
     def __init__(self, x1,
@@ -203,5 +240,10 @@ if __name__ == "__main__":
                 app)
     #maze._break_entrance_and_exit()
     maze._break_walls_r(0, 0)
+    maze._break_entrance_and_exit()
+    if maze.solve():
+        print("Maze solved!")
+    else:
+        print("No solution found.")
     app.wait_for_close()            
         
