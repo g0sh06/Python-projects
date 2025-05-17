@@ -1,0 +1,8 @@
+            x_center y_center zoom
+Main Cardioid	-0.5	0	  1	     The main heart-shaped bulb
+Seahorse Valley	-0.75	0.1	  10–50	 Swirling seahorse tails
+Elephant Valley	-1.25	0	  5–20	Elephant-like trunk shapes
+Triple Spiral Valley	-0.088	0.654	50–200	Complex spiral arms
+Mini Mandelbrot	-1.748	0	200+	A tiny self-similar Mandelbrot
+Lightning Bolt	-0.1592	-1.031	100–500	Jagged fractal shapes
+Satellite Bulbs	-1.4	0	10–30	Small circular fractals

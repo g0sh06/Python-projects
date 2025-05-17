@@ -10,52 +10,35 @@ max_iter = 100
 # z(n+1) = z⌃2(n) + c
 def mandelbrot(c, max_iter):
     z = 0
-    # for all n variables intul it reaches the biggest iteration
     for n in range(max_iter):
-        z = z**2 + c
-        if z == 0:
-            return 0
-        elif abs(z) > 2:
-            return z  # Return the number of iterations at divergence
+        if abs(z) > 2:
+            return n
+        z = z*z + c
     return max_iter
 
-# for n in range(10):
-#     print(mandelbrot(1, 100000000))
+def generate_mandelbrot(xmin, xmax, ymin, ymax, width, height, max_iter):
+    r1 = np.linspace(xmin, xmax, width)
+    r2 = np.linspace(ymin, ymax, height)
+    return np.array([[mandelbrot(complex(r, i), max_iter) for r in r1] for i in r2])
 
-# we generate the mandelbrot set by iterating over each pixel in the specified grid
-# and compute the Mandelbrot set value(from mandelbrot function) for each point
-def mandelbrot_generate(width, height, xmin, xmax, ymin, ymax, max_iter):
-    mandelbrot_set = np.zeros((width, height), dtype=float)
-    # realNumber and imaginaryNumber represent the the consecutive real parts(x-values, y-values
-    # of complex numbers in the grid.
-    # we are using the following formula:
-    # imaginaryNumber = (ymax - ymin) / (height - 1)
-    # it ensures that every pixel of the grid corresponds to unique part of the complex number
-    realNumber = (xmax - xmin) / (width - 1)
-    imaginaryNumber = (ymax - ymin) / (height - 1)
-
-    for n in range(width):
-        for i in range(height):
-            # calculate the real an real and imaginary parts based on the pixel's position in the grid
-            real = float(xmin + n * realNumber)
-            imag = float(ymin + i * imaginaryNumber)
-            # c is the complex number from the real one and the imaginary one
-            c = complex(real, imag)
-            mandelbrot_set[n, i] = mandelbrot(c, max_iter)
-    return mandelbrot_set
-
-# in display_mandelbrot method we parse all of data in the mandebrot_set array and
-# create a statistical-like visualization using matplotlib and .imshow method
-def display_mandelbrot(mandelbrot_set, xmin, xmax, ymin, ymax):
-    plt.imshow(mandelbrot_set.T, extent=(xmin, xmax, ymin, ymax), cmap='inferno')
-    plt.title('Mandelbrot set')
-    plt.xlabel('Real numbers')
-    plt.ylabel('Imaginary numbers')
+def plot_mandelbrot(xmin=-2, xmax=1, ymin=-1.5, ymax=1.5, width=800, height=800, max_iter=100, cmap='hot'):
+    mandelbrot_set = generate_mandelbrot(xmin, xmax, ymin, ymax, width, height, max_iter)
+    plt.imshow(mandelbrot_set, extent=(xmin, xmax, ymin, ymax), cmap=cmap)
+    plt.xlabel("Re")
+    plt.ylabel("Im")
+    plt.title("Mandelbrot Set")
     plt.show()
 
+if __name__ == '__main__':
+    x_center = float(input("Enter x center: "))
+    y_center = float(input("Enter y center: "))
+    zoom = float(input("Enter zoom level (e.g. 2 = zoom in 2x): "))
+    scale = 1.5 / zoom
+    plot_mandelbrot(xmin=x_center - scale, xmax=x_center + scale,
+                    ymin=y_center - scale, ymax=y_center + scale)
 
-mandelbrot_set = mandelbrot_generate(width, height, xmin, xmax, ymin, ymax, max_iter)
-display_mandelbrot(mandelbrot_set, xmin, xmax, ymin, ymax)
+
+
 
 
 
